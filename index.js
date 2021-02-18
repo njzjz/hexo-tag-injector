@@ -44,7 +44,7 @@ class Injector {
                 }
             }
             return str;
-        });
+        }, 9);
     }
 
     _injector(input, pattern, code, isBegin = true) {
