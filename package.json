@@ -1,6 +1,6 @@
 {
   "name": "hexo-tag-injector",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "inject to posts that have tags",
   "main": "index.js",
   "scripts": {
