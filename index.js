@@ -1,12 +1,13 @@
 const crypto = require("crypto");
+const escapeStringRegexp = require('escape-string-regexp');
 
 class Injector {
     constructor(hexo) {
         this.hexo = hexo;
         this.id = crypto.randomBytes(16).toString("hex");
-        this.taglt = `<${this.id}>`;
-        this.tagrt = `</${this.id}>`;
-        this.re = new RegExp(this.taglt + "(([\\s\\S])*?)" + this.tagrt, "g");
+        this.taglt = `<!--begin_${this.id}-->`;
+        this.tagrt = `<!--end_${this.id}-->`;
+        this.re = new RegExp(escapeStringRegexp(this.taglt) + "(([\\s\\S])*?)" + escapeStringRegexp(this.tagrt), "g");
     }
 
     mark(str) {
