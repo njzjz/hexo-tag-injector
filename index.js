@@ -2,9 +2,15 @@ const crypto = require("crypto");
 const escapeStringRegexp = require('escape-string-regexp');
 
 class Injector {
-    constructor(hexo) {
+    constructor(hexo, id = null) {
         this.hexo = hexo;
-        this.id = crypto.randomBytes(16).toString("hex");
+        if (id) {
+            // use md5 hash as id
+            this.id = crypto.createHash('md5').update(id).digest('hex');
+        } else {
+            // if id is not set, a random number will used
+            this.id = crypto.randomBytes(16).toString("hex");
+        }
         this.taglt = `<!--begin_${this.id}-->`;
         this.tagrt = `<!--end_${this.id}-->`;
         this.re = new RegExp(escapeStringRegexp(this.taglt) + "(([\\s\\S])*?)" + escapeStringRegexp(this.tagrt), "g");
